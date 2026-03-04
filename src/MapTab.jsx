@@ -221,7 +221,10 @@ export default function MapTab({ allData, years, editMode, onSaveAirports, airpo
     if (leafRef.current || !mapRef.current) return;
     const L = window.L; if (!L) return;
     const map = L.map(mapRef.current, { center:[45,15], zoom:4, zoomControl:true, attributionControl:false });
-    L.tileLayer("https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png", { maxZoom:20 }).addTo(map);
+    L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
+        maxZoom: 19,
+        subdomains: "abcd",
+        }).addTo(map);
     leafRef.current = map;
     renderMap(map, routes, activeBase);
     return () => { try { map.remove(); } catch(e){} leafRef.current=null; };
